@@ -68,16 +68,19 @@ if __name__ == '__main__':
     resp = requests.get(url=list_url, headers=headers)
     file_list = resp.json()
 
+
     print("[*] downloading files:")
     
     dl_url = "https://anonymous.4open.science/api/repo/"+ name +"/file/"
     files = []
     out = []
     for file in dict_parse(file_list):
-        file_path = os.path.join(*file[-len(file):-2]) # * operator to unpack the arguments out of a list
-        save_path = os.path.join(args.dir, file_path)
-        file_url = dl_url + file_path
-        files.append((file_url, save_path))
+        # 由于每15分钟至多请求350次，故而可以指定下载的文件夹从而分批次下载
+        if(file[0] == "notebooks"):
+            file_path = os.path.join(*file[-len(file):-2]) # * operator to unpack the arguments out of a list
+            save_path = os.path.join(args.dir, file_path)
+            file_url = dl_url + file_path
+            files.append((file_url, save_path))
     
     with concurrent.futures.ThreadPoolExecutor(max_workers=max_conns) as executor:
         future_to_url = (executor.submit(req_url, dl_file) for dl_file in files)

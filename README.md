@@ -9,7 +9,6 @@ python download.py --url https://anonymous.4open.science/r/****/ --dir savepath/
 ```
 pls make sure there is a slash in the end of url.
 
-#### Acknowledgement
+# one more thing to mention
 
-Thanks to [tdurieux's Anonymous Github project] (https://github.com/tdurieux/anonymous_github)
-and [ShoufaChen's Anonymous Github project] (https://github.com/ShoufaChen/clone-anonymous4open)
+Due to the limit of 350 requests every fifteen minutes, if there are too many files, you can refer to the Chinese comments to specify a subfolder for downloading one by one.
